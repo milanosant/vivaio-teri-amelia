@@ -26,11 +26,17 @@ mongoose.connect(process.env.MONGO_URI)
     .catch((err) => console.error('🔴 Errore di connessione a MongoDB:', err));
 
 // ==========================================
-// 5. ROTTE DI BASE (Test)
+// 5. ROTTE DELL'APPLICAZIONE
 // ==========================================
+// Rotta di test
 app.get('/', (req, res) => {
     res.send('🌿 Server del Vivaio Teri Amelia funzionante in modo eccellente!');
 });
+
+// Importiamo e usiamo le rotte di autenticazione
+const authRoutes = require('./routes/authRoutes');
+app.use('/api/auth', authRoutes); 
+// Questo significa che tutte le rotte in authRoutes avranno "/api/auth" come prefisso
 
 // ==========================================
 // 6. AVVIO DEL SERVER
