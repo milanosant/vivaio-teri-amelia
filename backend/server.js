@@ -37,6 +37,8 @@ app.get('/', (req, res) => {
 const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes); 
 // Questo significa che tutte le rotte in authRoutes avranno "/api/auth" come prefisso
+// Importiamo e usiamo le rotte del catalogo piantine
+app.use('/api/plants', require('./routes/plantRoutes'));
 
 // ==========================================
 // 6. AVVIO DEL SERVER
