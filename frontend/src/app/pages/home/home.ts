@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Serve per usare *ngIf e *ngFor nell'HTML
 import { PlantService } from '../../services/plant';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [], // Non serve più CommonModule con la nuova sintassi magica!
   templateUrl: './home.html',
   styleUrls: ['./home.scss']
 })

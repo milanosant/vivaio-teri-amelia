@@ -12,12 +12,14 @@ require('dotenv').config();
 const app = express();
 
 // ==========================================
-// 3. MIDDLEWARE (Configurazioni globali)
+// 3. MIDDLEWARE (I "Buttafuori" e gli interpreti)
 // ==========================================
-app.use(cors()); 
-app.use(express.json()); 
+app.use(cors()); // Attiviamo il lasciapassare per tutti
+
+app.use(express.json()); // Permette al server di capire i dati in formato JSON
 
 // ==========================================
+
 // 4. CONNESSIONE AL DATABASE MONGODB
 // ==========================================
 // Mongoose usa l'URI nascosto nel file .env per collegarsi
