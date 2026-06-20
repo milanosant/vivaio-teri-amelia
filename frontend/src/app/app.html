@@ -1,36 +1,33 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm">
-  <div class="container">
-    <a class="navbar-brand fw-bold" routerLink="/">🌿 Vivaio Teri Amelia</a>
-    
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home/Catalogo</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/chi-siamo" routerLinkActive="active">Chi Siamo</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">🛒 Carrello</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-warning fw-bold" href="#">Area Admin</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<!-- Tutto deve stare dentro ion-app -->
+<ion-app>
+  
+  <!-- HEADER: La nuova barra in stile applicazione -->
+  <ion-header>
+    <ion-toolbar color="success">
+      <ion-title style="cursor: pointer;" routerLink="/">
+        🌿 Vivaio Teri Amelia
+      </ion-title>
+      
+      <!-- Pulsanti di navigazione a destra -->
+      <ion-buttons slot="end">
+        <ion-button routerLink="/">Catalogo</ion-button>
+        <ion-button routerLink="/chi-siamo">Chi Siamo</ion-button>
+        <ion-button>🛒 Carrello</ion-button>
+        <ion-button color="warning">Area Admin</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 
-<main class="container my-5 min-vh-100">
-  <router-outlet></router-outlet>
-</main>
+  <!-- CONTENUTO: Qui dentro verranno caricate dinamicamente le varie pagine (Home, Dettagli, ecc.) -->
+  <ion-content>
+    <ion-router-outlet></ion-router-outlet>
+  </ion-content>
+  
+  <!-- FOOTER -->
+  <ion-footer>
+    <ion-toolbar color="dark">
+      <ion-title size="small" class="ion-text-center">© 2026 Vivaio Teri Amelia - Progetto Esame</ion-title>
+    </ion-toolbar>
+  </ion-footer>
 
-<footer class="bg-dark text-light text-center py-3 mt-auto">
-  <div class="container">
-    <p class="mb-0">© 2026 Vivaio Teri Amelia - Progetto Esame</p>
-  </div>
-</footer>
+</ion-app>

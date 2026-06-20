@@ -1,28 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core'; // 1. Importiamo il ChangeDetectorRef
+import { RouterModule } from '@angular/router'; 
+import { IonicModule } from '@ionic/angular'; 
 import { PlantService } from '../../services/plant';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [], // Non serve più CommonModule con la nuova sintassi magica!
+  imports: [IonicModule, RouterModule],
   templateUrl: './home.html',
   styleUrls: ['./home.scss']
 })
 export class Home implements OnInit {
-  // Qui salveremo le piantine che arrivano dal database
   plants: any[] = [];
 
-  // "Iniettiamo" il nostro postino nel costruttore
-  constructor(private plantService: PlantService) {}
+  // 2. "Iniettiamo" lo strumento nel costruttore insieme al postino
+  constructor(
+    private plantService: PlantService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  // Questa funzione scatta in automatico appena si apre la pagina
   ngOnInit(): void {
     this.plantService.getPlants().subscribe({
       next: (datiDalServer) => {
         this.plants = datiDalServer;
-        console.log('Piantine caricate:', this.plants);
+        
+        // 3. Diamo la "sveglia" manuale all'interfaccia grafica!
+        this.cdr.detectChanges(); 
       },
-      error: (err) => console.error('Errore nel caricamento del catalogo', err)
+      error: (err) => {
+        console.error('Errore durante la chiamata al server:', err);
+      }
     });
   }
 }

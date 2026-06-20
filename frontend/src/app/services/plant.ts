@@ -6,13 +6,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PlantService {
-  // Questo è l'indirizzo esatto che abbiamo configurato nel backend!
   private apiUrl = 'http://localhost:3000/api/plants'; 
 
   constructor(private http: HttpClient) { }
 
-  // Funzione che richiede tutte le piantine al database
   getPlants(): Observable<any> {
     return this.http.get(this.apiUrl);
+  }
+
+  // NUOVA FUNZIONE: Cerca una sola pianta usando il suo ID univoco
+  getPlantById(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`);
   }
 }

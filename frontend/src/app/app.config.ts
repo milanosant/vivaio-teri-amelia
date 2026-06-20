@@ -1,13 +1,13 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
-import { provideIonicAngular } from '@ionic/angular/standalone'; // Importiamo il postino
+import { provideIonicAngular } from '@ionic/angular/standalone';
+import { provideHttpClient } from '@angular/common/http'; // 1. Riaggiungiamo questa riga
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(),
-    provideIonicAngular({}), // Lo attiviamo per tutta l'applicazione
-  ],
+    provideIonicAngular({}),
+    provideHttpClient() // 2. Riattiviamo il postino qui!
+  ]
 };
