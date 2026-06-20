@@ -1,0 +1,33 @@
+<ion-content class="ion-padding">
+  <h2 style="color: var(--ion-color-success);">📝 Crea un Account</h2>
+
+  <form (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Nome e Cognome</ion-label>
+      <ion-input type="text" name="name" [(ngModel)]="name" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" name="email" [(ngModel)]="email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Telefono</ion-label>
+      <ion-input type="tel" name="phone" [(ngModel)]="phone" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" name="password" [(ngModel)]="password" required></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" color="success" type="submit" style="margin-top: 20px;">
+      Registrati
+    </ion-button>
+  </form>
+
+  <p class="ion-text-center" style="margin-top: 15px;">
+    Hai già un account? <a routerLink="/login" style="color: var(--ion-color-success);">Accedi</a>
+  </p>
+</ion-content>

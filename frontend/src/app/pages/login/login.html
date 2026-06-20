@@ -1,0 +1,23 @@
+<ion-content class="ion-padding">
+  <h2 style="color: var(--ion-color-success);">🔐 Accedi</h2>
+
+  <form (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" name="email" [(ngModel)]="email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" name="password" [(ngModel)]="password" required></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" color="success" type="submit" style="margin-top: 20px;">
+      Accedi
+    </ion-button>
+  </form>
+
+  <p class="ion-text-center" style="margin-top: 15px;">
+    Non hai un account? <a routerLink="/registrati" style="color: var(--ion-color-success);">Registrati</a>
+  </p>
+</ion-content>

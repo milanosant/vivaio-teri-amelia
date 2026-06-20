@@ -1,0 +1,59 @@
+.cart-title {
+  color: var(--ion-color-success, #2dd36f);
+  margin-bottom: 1.5rem;
+}
+
+.empty-cart {
+  text-align: center;
+  padding: 3rem 0;
+  color: #999;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 80px 1fr auto auto auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #333;
+
+  img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .scientific-name {
+    font-style: italic;
+    color: #aaa;
+    font-size: 0.85rem;
+  }
+
+  .price {
+    color: #2dd36f;
+    font-weight: bold;
+  }
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.subtotal {
+  font-weight: bold;
+  min-width: 70px;
+  text-align: right;
+}
+
+.cart-summary {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 2px solid #2dd36f;
+
+  ion-button {
+    margin-top: 0.5rem;
+  }
+}

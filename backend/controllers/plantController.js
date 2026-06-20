@@ -84,3 +84,20 @@ exports.createPlant = async (req, res) => {
     res.status(500).json({ message: "Errore interno del server durante il salvataggio" });
   }
 };
+
+// NUOVA FUNZIONE: Elimina una piantina (Metodo DELETE)
+exports.deletePlant = async (req, res) => {
+  try {
+    // Cerchiamo la pianta tramite l'ID passato nell'URL e la eliminiamo
+    const deletedPlant = await Plant.findByIdAndDelete(req.params.id);
+    
+    if (!deletedPlant) {
+      return res.status(404).json({ message: "Piantina non trovata" });
+    }
+    
+    res.status(200).json({ message: "Piantina eliminata con successo!" });
+  } catch (error) {
+    console.error('🔴 Errore durante l\'eliminazione:', error);
+    res.status(500).json({ message: "Errore interno del server" });
+  }
+};

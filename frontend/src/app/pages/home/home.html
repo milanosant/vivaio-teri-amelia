@@ -16,7 +16,7 @@
         Stiamo piantando nuovi semi. Il database al momento è vuoto, ma presto arriveranno nuove piantine.
       </ion-card-content>
     </ion-card>
-  } 
+  }
   @else {
     <ion-grid>
       <ion-row>
@@ -24,20 +24,24 @@
           <ion-col size="12" size-md="6" size-lg="3">
             <ion-card>
               <img [src]="plant.imageUrl || 'https://via.placeholder.com/400x300?text=Foto+Piantina'" alt="Foto pianta" />
-              
+
               <ion-card-header>
                 <ion-card-subtitle><i>{{ plant.scientificName }}</i></ion-card-subtitle>
                 <ion-card-title color="success">{{ plant.name }}</ion-card-title>
               </ion-card-header>
-              
+
               <ion-card-content>
                 <p class="ion-text-truncate">{{ plant.description }}</p>
-                
+
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
                   <b style="font-size: 1.2rem;">€ {{ plant.price }}</b>
                   <ion-button color="success" fill="outline" size="small" [routerLink]="['/pianta', plant._id]">Dettagli</ion-button>
                 </div>
-                
+
+                <ion-button color="success" expand="block" size="small" style="margin-top: 10px;" (click)="aggiungiAlCarrello(plant)">
+                  🛒 Aggiungi al Carrello
+                </ion-button>
+
                 <p style="margin-top: 10px; font-size: 0.8rem; color: gray;">Stato: <b>{{ plant.status }}</b></p>
               </ion-card-content>
             </ion-card>

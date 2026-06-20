@@ -1,5 +1,5 @@
 <ion-content class="ion-padding">
-  
+
   <ion-button fill="clear" color="success" routerLink="/" style="margin-bottom: 20px;">
     ⬅️ Torna al Catalogo
   </ion-button>
@@ -7,20 +7,20 @@
   @if (plant) {
     <ion-grid>
       <ion-row>
-        
+
         <ion-col size="12" size-md="6">
-          <img [src]="plant.imageUrl || 'https://via.placeholder.com/600x400?text=Foto+Piantina'" 
-               alt="Foto di {{ plant.name }}" 
+          <img [src]="plant.imageUrl || 'https://via.placeholder.com/600x400?text=Foto+Piantina'"
+               alt="Foto di {{ plant.name }}"
                style="width: 100%; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
         </ion-col>
-        
+
         <ion-col size="12" size-md="6" class="ion-padding-start">
           <h1 style="color: var(--ion-color-success); margin-top: 0; font-weight: bold;">{{ plant.name }}</h1>
           <h4 style="color: gray; font-style: italic; margin-top: -10px;">{{ plant.scientificName }}</h4>
-          
+
           <h2 style="font-weight: bold; font-size: 2rem;">€ {{ plant.price }}</h2>
           <p style="font-size: 1.1rem; line-height: 1.5;">{{ plant.description }}</p>
-          
+
           <ion-card color="light" style="margin: 20px 0; border-left: 5px solid var(--ion-color-success);">
             <ion-card-header>
               <ion-card-title style="font-size: 1.2rem;">📋 Esigenze Botaniche</ion-card-title>
@@ -33,15 +33,20 @@
             </ion-card-content>
           </ion-card>
 
-          <ion-button expand="block" color="success" size="large" style="margin-top: 20px;">
+          <ion-button expand="block" color="success" size="large" style="margin-top: 20px;" (click)="onAddToCart()">
             🛒 Aggiungi al Carrello
           </ion-button>
+          @if (authService.isAdmin()) {
+          <ion-button expand="block" color="danger" size="large" style="margin-top: 10px;" fill="outline" (click)="onDelete()">
+            🗑️ Elimina Pianta (Admin)
+          </ion-button>
+          }
         </ion-col>
 
       </ion-row>
     </ion-grid>
-  } 
-  
+  }
+
   @else {
     <div class="ion-text-center" style="margin-top: 100px;">
       <ion-spinner color="success" name="crescent"></ion-spinner>

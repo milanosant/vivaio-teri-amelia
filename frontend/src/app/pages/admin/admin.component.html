@@ -1,66 +1,31 @@
 <ion-content class="ion-padding">
-  <div style="max-width: 600px; margin: 0 auto;">
-    
-    <h1 style="color: var(--ion-color-success); font-weight: bold; margin-bottom: 20px;">
-      🏪 Pannello Amministratore: Inserisci Nuova Pianta
-    </h1>
+  <h2 style="color: var(--ion-color-success);">📦 Ordini Ricevuti</h2>
 
-    <ion-list lines="inset" style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 10px;">
-      
-      <ion-item-divider><ion-label color="success"><b>INFORMAZIONI GENERALI</b></ion-label></ion-item-divider>
-      
-      <ion-item>
-        <ion-input label="Nome Pianta *" labelPlacement="stacked" placeholder="Es. Ficus Benjamin" [(ngModel)]="newPlant.name" required></ion-input>
-      </ion-item>
+  @if (ordini.length === 0) {
+    <ion-card color="light" class="ion-text-center">
+      <ion-card-content>Nessun ordine ricevuto al momento.</ion-card-content>
+    </ion-card>
+  } @else {
+    @for (ordine of ordini; track ordine._id) {
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>{{ ordine.createdAt | date:'dd/MM/yyyy HH:mm' }} — {{ ordine.shippingMethod }}</ion-card-subtitle>
+          <ion-card-title>{{ ordine.customerName }} — {{ ordine.customerPhone }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          @for (item of ordine.items; track item.plant._id) {
+            <p>{{ item.plant.name }} x{{ item.quantity }} — € {{ (item.priceAtPurchase * item.quantity).toFixed(2) }}</p>
+          }
+          <p><strong>Totale: € {{ ordine.totalAmount.toFixed(2) }}</strong></p>
 
-      <ion-item>
-        <ion-input label="Nome Scientifico" labelPlacement="stacked" placeholder="Es. Ficus benjamina" [(ngModel)]="newPlant.scientificName"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-textarea label="Descrizione *" labelPlacement="stacked" placeholder="Inserisci una descrizione accurata della pianta..." [(ngModel)]="newPlant.description" rows="3" required></ion-textarea>
-      </ion-item>
-
-      <ion-item>
-        <ion-input label="Prezzo (€) *" labelPlacement="stacked" type="number" placeholder="Es. 15.50" [(ngModel)]="newPlant.price" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-select label="Stato Disponibilità" labelPlacement="stacked" [(ngModel)]="newPlant.status">
-          <ion-select-option value="pronte">Pronta per la vendita</ion-select-option>
-          <ion-select-option value="in crescita">In crescita / Esaurita temporaneamente</ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
-        <ion-input label="URL Immagine" labelPlacement="stacked" placeholder="Incolla il link di una foto (o lascia vuoto)" [(ngModel)]="newPlant.imageUrl"></ion-input>
-      </ion-item>
-
-      <ion-item-divider style="margin-top: 20px;"><ion-label color="success"><b>SCHEDA BOTANICA (INFO AGGIUNTIVE)</b></ion-label></ion-item-divider>
-
-      <ion-item>
-        <ion-input label="🌡️ Temperatura Ideale" labelPlacement="stacked" placeholder="Es. 18-25°C" [(ngModel)]="newPlant.botanicalInfo.temperature"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-input label="☀️ Esposizione al Sole" labelPlacement="stacked" placeholder="Es. Mezz'ombra, Luce indiretta" [(ngModel)]="newPlant.botanicalInfo.sunlight"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-input label="💧 Regole Annaffiatura" labelPlacement="stacked" placeholder="Es. Annaffiare solo quando il terreno è asciutto" [(ngModel)]="newPlant.botanicalInfo.watering"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-input label="🌱 Piante Amiche (separate da virgola)" labelPlacement="stacked" placeholder="Es. Felce, Pothos, Edera" [(ngModel)]="newPlant.botanicalInfo.companionsInput"></ion-input>
-      </ion-item>
-
-    </ion-list>
-
-    <ion-button expand="block" color="success" size="large" style="margin-top: 25px; font-weight: bold;" 
-                [disabled]="!newPlant.name || !newPlant.description || !newPlant.price" 
-                (click)="onSave()">
-      💾 Salva Nuova Piantina nel Database
-    </ion-button>
-
-  </div>
+          <ion-select [value]="ordine.status" (ionChange)="cambiaStato(ordine._id, $event.detail.value)" interface="popover">
+            <ion-select-option value="in attesa">In attesa</ion-select-option>
+            <ion-select-option value="confermato">Confermato</ion-select-option>
+            <ion-select-option value="pronto">Pronto</ion-select-option>
+            <ion-select-option value="ritirato/spedito">Ritirato/Spedito</ion-select-option>
+          </ion-select>
+        </ion-card-content>
+      </ion-card>
+    }
+  }
 </ion-content>

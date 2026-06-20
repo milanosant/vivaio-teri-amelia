@@ -1,29 +1,38 @@
-<!-- Tutto deve stare dentro ion-app -->
 <ion-app>
-  
-  <!-- HEADER: La nuova barra in stile applicazione -->
+
   <ion-header>
     <ion-toolbar color="success">
       <ion-title style="cursor: pointer;" routerLink="/">
         🌿 Vivaio Teri Amelia
       </ion-title>
-      
-      <!-- Pulsanti di navigazione a destra -->
+
       <ion-buttons slot="end">
         <ion-button routerLink="/">Catalogo</ion-button>
         <ion-button routerLink="/chi-siamo">Chi Siamo</ion-button>
-        <ion-button>🛒 Carrello</ion-button>
-        <ion-button color="warning" routerLink="/admin">Area Admin</ion-button>
+        <ion-button routerLink="/carrello">
+          🛒 Carrello
+          @if (cartService.totaleArticoli() > 0) {
+            <ion-badge color="danger" style="margin-left: 4px;">{{ cartService.totaleArticoli() }}</ion-badge>
+          }
+        </ion-button>
+
+        @if (authService.isAdmin()) {
+          <ion-button color="warning" routerLink="/admin">Area Admin</ion-button>
+        }
+
+        @if (authService.isLoggedIn()) {
+          <ion-button (click)="logout()">Ciao, {{ authService.currentUser()?.name }} (Esci)</ion-button>
+        } @else {
+          <ion-button routerLink="/login">Accedi</ion-button>
+        }
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
-  <!-- CONTENUTO: Qui dentro verranno caricate dinamicamente le varie pagine (Home, Dettagli, ecc.) -->
   <ion-content>
     <ion-router-outlet></ion-router-outlet>
   </ion-content>
-  
-  <!-- FOOTER -->
+
   <ion-footer>
     <ion-toolbar color="dark">
       <ion-title size="small" class="ion-text-center">© 2026 Vivaio Teri Amelia - Progetto Esame</ion-title>

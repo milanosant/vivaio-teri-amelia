@@ -24,4 +24,9 @@ export class PlantService {
   createPlant(plantData: any): Observable<any> {
     return this.http.post(this.apiUrl, plantData);
   }
+
+  // NUOVA FUNZIONE: Elimina una pianta
+  deletePlant(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }
