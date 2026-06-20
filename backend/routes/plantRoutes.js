@@ -7,6 +7,8 @@ const { verifyToken, isAdmin } = require('../middleware/authMiddleware');
 router.get('/', plantController.getPlants);
 router.get('/:id', plantController.getPlantById);
 
+router.post('/', plantController.createPlant);
+
 // Rotte Protette (Accessibili SOLO con Token e ruolo Admin)
 router.post('/', verifyToken, isAdmin, plantController.createPlant);
 router.put('/:id', verifyToken, isAdmin, plantController.updatePlant);

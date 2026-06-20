@@ -10,12 +10,18 @@ export class PlantService {
 
   constructor(private http: HttpClient) { }
 
+  // Ottieni tutte le piante
   getPlants(): Observable<any> {
     return this.http.get(this.apiUrl);
   }
 
-  // NUOVA FUNZIONE: Cerca una sola pianta usando il suo ID univoco
+  // Ottieni una singola pianta
   getPlantById(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/${id}`);
+  }
+
+  // NUOVA FUNZIONE: Spedisce i dati della nuova pianta al backend con il metodo POST
+  createPlant(plantData: any): Observable<any> {
+    return this.http.post(this.apiUrl, plantData);
   }
 }

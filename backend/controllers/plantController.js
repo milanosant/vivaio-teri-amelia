@@ -61,3 +61,26 @@ exports.deletePlant = async (req, res) => {
         res.status(500).json({ message: 'Errore nell\'eliminazione', error });
     }
 };
+
+// FUNZIONE: Crea una nuova piantina (Metodo POST)
+exports.createPlant = async (req, res) => {
+  try {
+    // 1. Estraiamo i dati che il frontend ci ha inviato nel "corpo" della richiesta
+    const plantData = req.body;
+
+    // 2. Creiamo una nuova "Entity" basata sul nostro Modello Mongoose
+    // (Assicurati che il nome 'Plant' corrisponda a come lo hai importato in alto nel file, es. const Plant = require('../models/Plant');)
+    const newPlant = new Plant(plantData);
+
+    // 3. Salviamo fisicamente nel database (MongoDB creerà in automatico l' _id)
+    const savedPlant = await newPlant.save();
+
+    // 4. Rispondiamo al frontend con un codice 201 (Created) e restituiamo la pianta appena salvata
+    res.status(201).json(savedPlant);
+    
+  } catch (error) {
+    console.error('🔴 Errore durante il salvataggio della piantina:', error);
+    // Rispondiamo con un codice 500 (Internal Server Error) se qualcosa va storto
+    res.status(500).json({ message: "Errore interno del server durante il salvataggio" });
+  }
+};
